@@ -1,4 +1,4 @@
-import 'package:devfolio/core/theme/app_colors.dart';
+import 'package:devfolio/core/router/app_router.dart';
 import 'package:devfolio/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +11,13 @@ class DevfolioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Devfolio',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light, // TODO: CREATE A SETTING TO SWITCH BETWEEN LIGHT AND DARK MODE
       darkTheme: AppTheme.darkTheme,
-      home: const Scaffold(body: Center(child: Text('Hello, World!'))),
+      routerConfig: AppRouter.router,
     );
   }
 }
