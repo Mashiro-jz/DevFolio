@@ -1,0 +1,72 @@
+[
+  {
+    "id": "devfolio",
+    "title": "Devfolio",
+    "shortDescription": "Interactive mobile portfolio & CV application",
+    "fullDescription": "A modern, interactive mobile application built with Flutter that serves as my personal software engineering portfolio and CV. Engineered with a Feature-First Clean Architecture approach, custom canvas rendering, and a cohesive design system.",
+    "status": "In Progress",
+    "iconPath": "assets/images/devfolio_icon.png",
+    "bannerPath": "assets/images/devfolio_banner.png",
+    "techStack": [
+      "Flutter",
+      "Dart",
+      "Riverpod",
+      "GoRouter",
+      "Freezed"
+    ],
+    "keyFeatures": [
+      "Feature-First Clean Architecture",
+      "Adaptive Light & Dark theme with ThemeExtension",
+      "Custom timeline rendering using CustomPainter",
+      "Asynchronous local JSON data layer"
+    ],
+    "githubUrl": "https://github.com/Mashiro-jz/DevFolio"
+  },
+  {
+    "id": "tempbox",
+    "title": "TempBox",
+    "shortDescription": "Disposable email mobile app",
+    "fullDescription": "An innovative mobile application that provides instant access to temporary, disposable email addresses. Designed to protect user privacy and keep personal inboxes clean from spam by automatically managing temporary mailboxes.",
+    "status": "Completed",
+    "iconPath": "assets/images/tempbox_icon.png",
+    "bannerPath": "assets/images/tempbox_banner.png",
+    "techStack": [
+      "Flutter",
+      "Dart",
+      "Riverpod",
+      "Freezed",
+      "Shared Preferences",
+      "Mail.tm API"
+    ],
+    "keyFeatures": [
+      "Instant disposable email address generation",
+      "Real-time inbox synchronization via REST API",
+      "Local session persistence",
+      "Clean, privacy-focused user interface"
+    ],
+    "githubUrl": "https://github.com/Mashiro-jz/TempBox"
+  },
+  {
+    "id": "sgym",
+    "title": "sGym",
+    "shortDescription": "Gym management & class booking app",
+    "fullDescription": "A comprehensive mobile application developed using Flutter, designed to facilitate fitness center management, class scheduling, membership purchases, and trainer-client interactions. Engineered with a focus on scalability and maintainability using Clean Architecture and SOLID principles.",
+    "status": "In Progress",
+    "iconPath": "assets/images/sgym_icon.png",
+    "bannerPath": "assets/images/sgym_banner.png",
+    "techStack": [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "Bloc",
+      "Freezed"
+    ],
+    "keyFeatures": [
+      "Gym membership purchasing & management",
+      "Fitness class scheduling and booking",
+      "Real-time data synchronization & secure auth",
+      "Scalable Clean Architecture & SOLID patterns"
+    ],
+    "githubUrl": "https://github.com/Mashiro-jz/sGym"
+  }
+]

@@ -12,10 +12,10 @@ class HomeScreen extends ConsumerWidget {
         title: const Text('Home'),
         actions: [
           IconButton(
-            onPressed: ref.read(themeModeProvider.notifier).toggleTheme,
+            onPressed: () => ref.read(themeModeProvider.notifier).toggleTheme(),
             icon: ref.watch(themeModeProvider) == ThemeMode.light
-                ? Icon(Icons.dark_mode_outlined)
-                : Icon(Icons.light_mode_outlined),
+                ? const Icon(Icons.dark_mode_outlined)
+                : const Icon(Icons.light_mode_outlined),
           ),
         ],
       ),
