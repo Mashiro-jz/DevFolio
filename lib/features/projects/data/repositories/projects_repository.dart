@@ -9,7 +9,7 @@ class ProjectsRepository {
       'assets/data/projects.json',
     );
 
-    List<dynamic> text = jsonDecode(response);
-    return text.map((e) => ProjectModel.fromJson(e)).toList();
+    final List<dynamic> jsonList = jsonDecode(response);
+    return jsonList.map((e) => ProjectModel.fromJson(e)).toList();
   }
 }
