@@ -1,6 +1,6 @@
 import 'package:devfolio/features/projects/presentation/providers/projects_provider.dart';
 import 'package:devfolio/features/projects/presentation/widgets/project_card.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProjectsScreen extends ConsumerWidget {

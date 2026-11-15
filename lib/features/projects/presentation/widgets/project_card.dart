@@ -1,6 +1,6 @@
 import 'package:devfolio/core/theme/app_colors.dart';
 import 'package:devfolio/features/projects/data/models/project_model.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ProjectCard extends StatelessWidget {
   final ProjectModel project;
