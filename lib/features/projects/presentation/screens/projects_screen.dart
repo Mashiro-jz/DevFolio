@@ -1,5 +1,5 @@
 import 'package:devfolio/features/projects/presentation/providers/projects_provider.dart';
-import 'package:devfolio/features/projects/presentation/widgets/project_card.dart';
+import 'package:devfolio/features/projects/presentation/widgets/project_timeline_tile.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,22 +12,23 @@ class ProjectsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Projects')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: projectsAsync.when(
-          data: (projects) => ListView.separated(
-            padding: const EdgeInsets.all(16),
-            itemCount: projects.length,
-            separatorBuilder: (context, index) => const SizedBox(height: 12),
-            itemBuilder: (context, index) {
-              final project = projects[index];
-              return ProjectCard(project: project);
-            },
-          ),
-          error: (Object error, StackTrace stackTrace) =>
-              Center(child: Text(error.toString())),
-          loading: () => const Center(child: CircularProgressIndicator()),
+      body: projectsAsync.when(
+        data: (projects) => ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: projects.length,
+          itemBuilder: (context, index) {
+            final project = projects[index];
+            return ProjectTimelineTile(
+              project: project,
+              isFirst: index == 0,
+              isLast: index == projects.length - 1,
+              onTap: () {}, // TODO : dodać tutaj ekran szczegółów
+            );
+          },
         ),
+        error: (Object error, StackTrace stackTrace) =>
+            Center(child: Text(error.toString())),
+        loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );
   }

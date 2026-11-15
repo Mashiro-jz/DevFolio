@@ -5,7 +5,14 @@ import 'package:material_ui/material_ui.dart';
 class ProjectCard extends StatelessWidget {
   final ProjectModel project;
   final VoidCallback? onTap;
-  const ProjectCard({super.key, required this.project, this.onTap});
+  final double leadingInset;
+
+  const ProjectCard({
+    super.key,
+    required this.project,
+    this.onTap,
+    this.leadingInset = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class ProjectCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.fromLTRB(16 + leadingInset, 16, 16, 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
