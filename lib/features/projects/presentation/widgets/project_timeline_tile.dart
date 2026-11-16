@@ -5,6 +5,7 @@ import 'package:devfolio/features/projects/data/models/project_model.dart';
 import 'package:devfolio/features/projects/presentation/widgets/project_card.dart';
 import 'package:material_ui/material_ui.dart';
 
+// TODO : W wolnej chwili pobawić się jeszcze z linią. Obliczyć dokładniej jak narysować linię z Mockupu.
 class _TimelinePainter extends CustomPainter {
   final Color dotColor;
   final Color lineColor;

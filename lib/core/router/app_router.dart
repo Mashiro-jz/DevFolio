@@ -1,6 +1,7 @@
 import 'package:devfolio/features/contact/presentation/screens/contact_screen.dart';
 import 'package:devfolio/features/home/presentation/screens/home_screen.dart';
 import 'package:devfolio/features/journey/presentation/screens/journey_screen.dart';
+import 'package:devfolio/features/projects/presentation/screens/project_details_screen.dart';
 import 'package:devfolio/features/projects/presentation/screens/projects_screen.dart';
 import 'package:devfolio/features/skills/presentation/screens/skills_screen.dart';
 import 'package:devfolio/shared/widgets/main_shell_screen.dart';
@@ -27,6 +28,15 @@ class AppRouter {
               GoRoute(
                 path: '/projects',
                 builder: (context, state) => const ProjectsScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'details/:id',
+                    builder: (context, state) {
+                      final String projectId = state.pathParameters['id']!;
+                      return ProjectDetailsScreen(projectId: projectId);
+                    },
+                  ),
+                ],
               ),
             ],
           ),

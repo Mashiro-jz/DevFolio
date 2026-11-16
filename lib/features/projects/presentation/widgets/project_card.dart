@@ -1,5 +1,6 @@
 import 'package:devfolio/core/theme/app_colors.dart';
 import 'package:devfolio/features/projects/data/models/project_model.dart';
+import 'package:devfolio/features/projects/presentation/widgets/tech_chip.dart';
 import 'package:material_ui/material_ui.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -78,7 +79,7 @@ class ProjectCard extends StatelessWidget {
                       runSpacing: 6,
                       children: [
                         for (final tech in project.techStack)
-                          _TechChip(label: tech),
+                          TechChip(label: tech),
                       ],
                     ),
                   ],
@@ -92,32 +93,6 @@ class ProjectCard extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _TechChip extends StatelessWidget {
-  final String label;
-  const _TechChip({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.colors;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: colors.surfaceVariant,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: colors.textSecondary,
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
         ),
       ),
     );
