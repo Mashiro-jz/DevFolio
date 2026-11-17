@@ -228,10 +228,8 @@ class ProjectDetailsScreen extends ConsumerWidget {
               ),
             );
           },
-          error: (error, stackTrace) =>
-              Scaffold(body: Center(child: Text('Wystąpił błąd: $error'))),
-          loading: () =>
-              const Scaffold(body: Center(child: CircularProgressIndicator())),
+          error: (error, stack) => Center(child: Text('Błąd: $error')),
+          loading: () => const Center(child: CircularProgressIndicator()),
         );
   }
 }

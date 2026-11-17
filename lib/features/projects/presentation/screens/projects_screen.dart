@@ -54,8 +54,7 @@ class ProjectsScreen extends ConsumerWidget {
                       );
                     },
                   ),
-                  error: (Object error, StackTrace stackTrace) =>
-                      Center(child: Text(error.toString())),
+                  error: (error, stack) => Center(child: Text('Błąd: $error')),
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
                 ),
