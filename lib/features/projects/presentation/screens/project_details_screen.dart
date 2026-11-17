@@ -3,6 +3,7 @@ import 'package:devfolio/features/projects/presentation/providers/projects_provi
 import 'package:devfolio/features/projects/presentation/widgets/tech_chip.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetailsScreen extends ConsumerWidget {
   final String projectId;
@@ -12,20 +13,19 @@ class ProjectDetailsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colors;
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      body: ref
-          .watch(projectsProvider)
-          .when(
-            data: (projects) {
-              final project = projects.firstWhere((p) => p.id == projectId);
-
-              return SingleChildScrollView(
+    return ref
+        .watch(projectsProvider)
+        .when(
+          data: (projects) {
+            final project = projects.where((p) => p.id == projectId).first;
+            return Scaffold(
+              extendBodyBehindAppBar: true,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                iconTheme: const IconThemeData(color: Colors.white),
+              ),
+              body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -160,58 +160,79 @@ class ProjectDetailsScreen extends ConsumerWidget {
                     ),
                   ],
                 ),
-              );
-            },
-            error: (Object error, StackTrace stackTrace) =>
-                Center(child: Text(error.toString())),
-            loading: () => const Center(child: CircularProgressIndicator()),
-          ),
-
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                stops: [0.65, 0.95],
-                colors: [colors.primary, colors.primaryContainer],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
               ),
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Material(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(16),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(16),
-                onTap: () {
-                  // TODO: otworzyć project.githubUrl
-                },
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.code, color: Colors.white),
-                      SizedBox(width: 8),
-                      Text(
-                        'View on GitHub',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+
+              bottomNavigationBar: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        stops: [0.65, 0.95],
+                        colors: [colors.primary, colors.primaryContainer],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(16),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: () async {
+                          final projects = await ref.read(
+                            projectsProvider.future,
+                          );
+                          final project = projects.firstWhere(
+                            (p) => p.id == projectId,
+                          );
+                          final uri = Uri.parse(project.githubUrl);
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(
+                              uri,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          } else {
+                            if (!context.mounted) return;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Nie udało się otworzyć linku"),
+                                duration: const Duration(seconds: 4),
+                              ),
+                            );
+                          }
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.code, color: Colors.white),
+                              SizedBox(width: 8),
+                              Text(
+                                'View on GitHub',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-        ),
-      ),
-    );
+            );
+          },
+          error: (error, stackTrace) =>
+              Scaffold(body: Center(child: Text('Wystąpił błąd: $error'))),
+          loading: () =>
+              const Scaffold(body: Center(child: CircularProgressIndicator())),
+        );
   }
 }
 
